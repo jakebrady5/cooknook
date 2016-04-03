@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'angular-rails-templates'
 gem 'responders'
 gem 'bower-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
