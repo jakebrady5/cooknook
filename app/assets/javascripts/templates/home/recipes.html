@@ -4,6 +4,6 @@
   <li ng-repeat="recipe in ctrl.recipes">
     <h3><a href="#" ui-sref="home.recipe({id: recipe.id})">{{ recipe.title }}</a></h3>
     <a href="#" ui-sref="home.edit({id: recipe.id})">Edit Recipe</a>
-    <a href="#" ng-click="ctrl.deleteRecipe(recipe)">Delete Recipe</a>
+    <a href="" ng-click="ctrl.deleteRecipe(recipe)">Delete Recipe</a>
   </li>
 </ul>
