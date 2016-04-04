@@ -1,3 +1,6 @@
 <h3>{{ ctrl.recipe.title }}</h3>
 
-<a href="#" ui-sref="home.edit({id: recipe.id})">Edit Recipe</a>
+<h4>Instructions:</h4>
+<p>{{ ctrl.recipe.instructions }}</p>
+
+<a href="#" ui-sref="home.edit({id: ctrl.recipe.id})">Edit Recipe</a>
