@@ -1,6 +1,9 @@
-<h3>{{ ctrl.recipe.title }}</h3>
+<h2>{{ ctrl.recipe.title }}</h3>
+
+<h3>Ingredients:</h3>
+<div>{{ ctrl.recipe.ingredients }}</div>
 
 <h4>Instructions:</h4>
-<p>{{ ctrl.recipe.instructions }}</p>
+<div>{{ ctrl.recipe.instructions }}</div>
 
 <a href="#" ui-sref="home.edit({id: ctrl.recipe.id})">Edit Recipe</a>
