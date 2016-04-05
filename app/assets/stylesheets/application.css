@@ -13,4 +13,6 @@
  *= require_tree .
  *= require_self
  */
-
+.angular-with-newlines{
+  white-space: pre-wrap;
+}

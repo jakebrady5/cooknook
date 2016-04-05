@@ -2,6 +2,7 @@ function RecipesController(Recipe, $location, $state, $stateParams){
   var ctrl = this;
   ctrl.recipes = Recipe.query();
   ctrl.newRecipe = new Recipe();
+  ctrl.filteredList = ctrl.recipes;
 
   if(!!$stateParams.id){
     ctrl.recipe = Recipe.get({id: $stateParams.id});
@@ -24,6 +25,14 @@ function RecipesController(Recipe, $location, $state, $stateParams){
       $state.go($state.current, {}, {reload: true});
     });
   };
+
+  ctrl.search = '';
+
+  // ctrl.refilter = function(){
+  //   ctrl.filteredList = $filter('filter')(ctrl.recipes, ctrl.search);
+  // };
+
+  // ctrl.refilter();
 }
 
 angular
