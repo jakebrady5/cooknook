@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'devise'
 gem 'angular-rails-templates'
 gem 'responders'
 gem 'bower-rails'
