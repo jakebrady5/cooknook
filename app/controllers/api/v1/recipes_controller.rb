@@ -2,7 +2,7 @@ module Api
   module V1
     class RecipesController < ApplicationController
       before_action :authenticate_user!
-      
+
       respond_to :json
 
       def index
