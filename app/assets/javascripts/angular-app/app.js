@@ -27,9 +27,14 @@ angular
         templateUrl: 'home/edit.html',
         controller: 'RecipesController as ctrl'
       })
+      .state('home.signup', {
+        url: 'signup',
+        templateUrl: 'devise/new_registration.html',
+        controller: 'DeviseController as devise'
+      })
       .state('home.login', {
         url: 'login',
-        templateUrl: 'devise/new_registration.html',
+        templateUrl: 'devise/login.html',
         controller: 'DeviseController as devise'
       });
 

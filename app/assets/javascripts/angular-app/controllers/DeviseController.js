@@ -1,12 +1,11 @@
-function DeviseController(Auth){
-  ctrl = this;
-  ctrl.credentials = {};
-  ctrl.user = {};
+function DeviseController($scope, Auth){
   //set user back to {} on logout when implemented
 
-  ctrl.login = function(){
-    Auth.login(ctrl.credentials).then(function(user){
-      ctrl.setCurrentUser;
+  $scope.login = function(){
+    debugger;
+    Auth.login($scope.credentials).then(function(user){
+      $scope.setCurrentUser();
+      $scope.credentials = {};
       console.log(user);
     }, function(error) {
       console.log(error);
@@ -14,33 +13,32 @@ function DeviseController(Auth){
   };
 
   //logs for testing, remove later
-  ctrl.register = function(){
-    Auth.register(ctrl.credentials).then(function(registeredUser) {
-      ctrl.setCurrentUser;
+  $scope.register = function(){
+    Auth.register($scope.credentials).then(function(registeredUser) {
+      $scope.setCurrentUser;
+      $scope.credentials = {};
       console.log(registeredUser);
     }, function(error) {
       console.log(error);
     });
   };
 
-  ctrl.logout = function(){
+  $scope.logout = function(){
     Auth.logout().then(function(){
-      ctrl.user = {};
+      $scope.user = {};
       console.log('logged out');
     }, function(error){
       console.log('error');
     });
   };
 
-  ctrl.loggedIn = function(){
-    console.log(Auth.isAuthenticated());
-    return Auth.isAuthenticated();
-  };
+  $scope.loggedIn = Auth.isAuthenticated;
 
-  ctrl.setCurrentUser = function(){
+  $scope.setCurrentUser = function(){
     Auth.currentUser().then(function(user){
-      ctrl.user = user;
-    })
+      debugger;
+      $scope.user = user;
+    });
   };
 
 }
