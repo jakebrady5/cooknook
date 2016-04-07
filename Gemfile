@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'angular_rails_csrf'
 gem 'devise'
 gem 'angular-rails-templates'
 gem 'responders'

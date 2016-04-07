@@ -1,0 +1,12 @@
+<div>
+  <h1>Register as a New User</h1>
+</div>
+
+<div>
+  <form ng-submit="devise.register()">
+    <input type="email" placeholder="Email Address" ng-model="devise.credentials.email">
+    <input type="text" placeholder="Username" ng-model="devise.credentials.username">
+    <input type="password" placeholder="Password" ng-model="devise.credentials.password">
+    <input type="submit" value="Register">
+  </form>
+</div>

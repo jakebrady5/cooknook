@@ -26,6 +26,11 @@ angular
         url: 'edit/:id',
         templateUrl: 'home/edit.html',
         controller: 'RecipesController as ctrl'
+      })
+      .state('home.login', {
+        url: 'login',
+        templateUrl: 'devise/new_registration.html',
+        controller: 'DeviseController as devise'
       });
 
     $urlRouterProvider.otherwise('/');
