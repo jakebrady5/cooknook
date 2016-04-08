@@ -1,4 +1,4 @@
-function DeviseController($scope, Auth){
+function DeviseController($scope, $rootScope, Auth, User, $location){
 
   $scope.console = function (){
     debugger;
@@ -56,7 +56,14 @@ function DeviseController($scope, Auth){
 
   $scope.$on('devise:new-registration', function(e, user) {
     $scope.user = user;
-    //then save username in rails
+    User.get({id: $scope.user.id}, function(user){
+      //this works but is throwing console error
+      user.username = $scope.credentials.username;
+      user.$update(function(user){
+        $rootScope.user = user;
+        $location.path('recipes');
+      });
+    });
   });
 
   $scope.$on('devise:login', function(e, user) {

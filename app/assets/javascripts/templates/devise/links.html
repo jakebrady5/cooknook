@@ -1,6 +1,7 @@
 <span ng-controller="DeviseController">
-  <a href="">{{ user.email }}</a>
+  <a href="">{{ user.username }}</a>
   <a href="" ng-click="console()">debugger</a>
   <a ng-hide="loggedIn()" href="" ui-sref="home.login">Log In</a>
+  <a href="" ng-hide="loggedIn()" ui-sref="home.signup">Sign Up</a>
   <a ng-show="loggedIn()" href="" ng-click="logout()" ui-sref="home">Log Out</a>
 </span>

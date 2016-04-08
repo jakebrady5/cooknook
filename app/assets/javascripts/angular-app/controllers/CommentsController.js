@@ -3,11 +3,12 @@ function CommentsController($location, Comment, $stateParams, $state, Auth){
   self.newComment = new Comment();
   self.comments = Comment.query({id: $stateParams.id});
 
-  if(!!$stateParams.id){
-    Auth.currentUser().then(function(user){
-      console.log(user.id);
-    });
-  }
+  //remove me later
+  // if(!!$stateParams.id){
+  //   Auth.currentUser().then(function(user){
+  //     console.log(user.id);
+  //   });
+  // }
 
   self.createComment = function(){
     self.newComment.recipe_id = $stateParams.id;

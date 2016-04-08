@@ -17,19 +17,12 @@ Rails.application.routes.draw do
   root 'application#index'
 
   Rails.application.routes.draw do
-    #need devise line here??
-    namespace :api, defaults:{format: :json} do
-      namespace :v1 do
-        resources :comments
-      end
-    end
-  end
-
-  Rails.application.routes.draw do
   devise_for :users
     namespace :api, defaults:{format: :json} do
       namespace :v1 do
         resources :recipes
+        resources :comments
+        resources :users, only: [:show, :update]
       end
     end
   end
