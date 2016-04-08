@@ -42,6 +42,7 @@ function DeviseController($scope, Auth){
 
   $scope.loggedIn = Auth.isAuthenticated;
 
+  //not in use?
   $scope.setCurrentUser = function(){
     Auth.currentUser().then(function(user){
       $scope.user = user;
