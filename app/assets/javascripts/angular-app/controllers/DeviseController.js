@@ -19,7 +19,7 @@ function DeviseController($scope, Auth){
   $scope.register = function(){
     Auth.register($scope.credentials).then(function(registeredUser) {
       //$scope.setCurrentUser;
-      $scope.credentials = {};
+      //$scope.credentials = {};
       console.log(registeredUser);
     }, function(error) {
       console.log(error);
@@ -56,6 +56,7 @@ function DeviseController($scope, Auth){
 
   $scope.$on('devise:new-registration', function(e, user) {
     $scope.user = user;
+    //then save username in rails
   });
 
   $scope.$on('devise:login', function(e, user) {

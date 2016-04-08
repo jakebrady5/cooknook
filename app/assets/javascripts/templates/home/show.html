@@ -4,6 +4,20 @@
 <div class="angular-with-newlines">{{ ctrl.recipe.ingredients }}</div>
 
 <h3>Instructions:</h3>
-<div class="angular-with-newlines">{{ ctrl.recipe.instructions }}</div>
+<div class="angular-with-newlines">{{ ctrl.recipe.instructions }}</div><br>
 
-<a href="#" ui-sref="home.edit({id: ctrl.recipe.id})">Edit Recipe</a>
+<a href="#" ui-sref="home.edit({id: ctrl.recipe.id})">Edit Recipe</a><br><br><br>
+
+<div ng-controller="CommentsController as comm">
+
+  <div ng-repeat="comment in comm.comments">
+    <p>By: {{comment.user_id}}: {{comment.body}}</p>
+    <a href="" ng-if="comment.user_id == devise.user.id">Delete</a>
+  </div>
+
+  <form validate ng-submit="comm.createComment()">
+    <label>Comment:</label><br>
+    <textarea rows="16" cols="75" ng-model="comm.newComment.body"></textarea><br>
+    <input type="submit" value="Comment">
+  </form>
+</div>
