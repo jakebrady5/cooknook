@@ -4,7 +4,9 @@ Search: <input ng-model="ctrl.search.ingredients" ng-change="ctrl.refilter()" />
 <ul>
   <li ng-repeat="recipe in ctrl.filteredList | filter:ctrl.search:strict">
     <h3><a href="#" ui-sref="home.recipe({id: recipe.id})">{{ recipe.title }}</a></h3>
-    <a href="#" ui-sref="home.edit({id: recipe.id})">Edit Recipe</a>
-    <a href="" ng-click="ctrl.deleteRecipe(recipe)">Delete Recipe</a>
+    <div ng-if="current_user.id == recipe.user_id">
+      <a href="#" ui-sref="home.edit({id: recipe.id})">Edit Recipe</a>
+      <a href="" ng-click="ctrl.deleteRecipe(recipe)">Delete Recipe</a>
+    </div>
   </li>
 </ul>

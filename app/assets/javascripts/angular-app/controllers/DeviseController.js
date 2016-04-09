@@ -1,29 +1,37 @@
-function DeviseController($scope, $rootScope, Auth, User, $location){
+function DeviseController($scope, $rootScope, Auth, User, $location, $state){
 
   $scope.console = function (){
+    $scope.setCurrentUser();
     debugger;
   }
 
+  $rootScope.$watch('current_user.username', function(){});
+
   $scope.login = function(){
     Auth.login($scope.credentials).then(function(user){
-      //$scope.setCurrentUser();
       $scope.credentials = {};
-      console.log(user);
-      console.log(Auth.isAuthenticated());
+      $scope.setCurrentUser();
     }, function(error) {
       console.log(error);
+    }).then(function(){
+      $location.path('recipes');
     });
   };
 
-  //logs for testing, remove later
   $scope.register = function(){
     Auth.register($scope.credentials).then(function(registeredUser) {
-      //$scope.setCurrentUser;
-      //$scope.credentials = {};
-      console.log(registeredUser);
+      User.get({id: registeredUser.id}, function(user){
+        user.username = $scope.credentials.username;
+        user.$update(function(user){
+          $scope.setCurrentUser();
+        });
+      });
     }, function(error) {
       console.log(error);
-    });
+    }).then(function(){
+        //refactor?
+        $location.path('recipes');
+      });
   };
 
   $scope.logout = function(){
@@ -33,8 +41,8 @@ function DeviseController($scope, $rootScope, Auth, User, $location){
         }
     };
     Auth.logout(config).then(function(){
-      $scope.user = {};
-      console.log('logged out');
+      $rootScope.user = {};
+      $location.path('login');
     }, function(error){
       console.log(error);
     });
@@ -42,36 +50,26 @@ function DeviseController($scope, $rootScope, Auth, User, $location){
 
   $scope.loggedIn = Auth.isAuthenticated;
 
-  //not in use?
+  //does this belong here or in a service?
   $scope.setCurrentUser = function(){
     Auth.currentUser().then(function(user){
-      $scope.user = user;
+      $rootScope.current_user = user;
+    }, function(error){
+      //move this to a more global spot
+      $location.path('login');
     });
   };
 
-  Auth.currentUser()
-    .then(function(user) {
-      $scope.user = user;
-    });
+  $scope.setCurrentUser();
 
+  //leaving temporarily to see if needed later
   $scope.$on('devise:new-registration', function(e, user) {
-    $scope.user = user;
-    User.get({id: $scope.user.id}, function(user){
-      //this works but is throwing console error
-      user.username = $scope.credentials.username;
-      user.$update(function(user){
-        $rootScope.user = user;
-        $location.path('recipes');
-      });
-    });
   });
 
   $scope.$on('devise:login', function(e, user) {
-    $scope.user = user;
   });
 
   $scope.$on('devise:logout', function(e, user) {
-    $scope.user = {};
   });
 
 }
