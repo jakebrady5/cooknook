@@ -3,9 +3,11 @@ function RecipesController(Recipe, UserRecipe, $rootScope, $location, $statePara
   ctrl.recipes = Recipe.query();
   ctrl.newRecipe = new Recipe();
   ctrl.filteredList = ctrl.recipes;
-  UserRecipe.get({id: 1}, function(data){
-    ctrl.myRecipes = data.user_recipes;
-    ctrl.myFilteredList = ctrl.myRecipes;
+  Auth.currentUser().then(function(user){
+    UserRecipe.get({id: user.id}, function(data){
+      ctrl.myRecipes = data.user_recipes;
+      ctrl.myFilteredList = ctrl.myRecipes;
+    });
   });
   ctrl.search = '';
 
@@ -17,21 +19,30 @@ function RecipesController(Recipe, UserRecipe, $rootScope, $location, $statePara
     Auth.currentUser().then(function(user){
       ctrl.newRecipe.user_id = user.id;
       ctrl.newRecipe.$save(function(){
-        $location.path('recipes');
+        $location.path('my_recipes');
       });
     });
   };
 
   ctrl.editRecipe = function(){
     ctrl.recipe.$update(function(){
-      $location.path('recipes');
+      $location.path('my_recipes');
+    });
+  };
+
+  ctrl.deleteMyRecipe = function(recipe){
+    recipe.hide=true;
+    Recipe.get({id: recipe.recipe.id}, function(data){
+      data.$delete(function(){
+        $location.path('my_recipes');
+      });
     });
   };
 
   ctrl.deleteRecipe = function(recipe) {
     recipe.hide=true;
     recipe.$delete(function(){
-      $location.path('recipes');
+      $location.path('my_recipes');
     });
   };
 }

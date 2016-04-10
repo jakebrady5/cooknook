@@ -4,12 +4,12 @@ module Api
       respond_to :json
 
       def index
-        @user_recipes = UserRecipe.where(user_id: params[:id])
-        render json: @user_recipes
+        # @user_recipes = UserRecipe.where(user_id: params[:id])
+        # render json: @user_recipes
       end
 
       def show
-        @user_recipes = UserRecipe.where(user_id: params[:id])
+        @user_recipes = UserRecipe.where(user_id: params[:id]).order("id DESC")
         render json: @user_recipes
       end
 
