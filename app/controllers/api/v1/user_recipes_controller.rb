@@ -9,7 +9,8 @@ module Api
       end
 
       def show
-        #might remove?
+        @user_recipes = UserRecipe.where(user_id: params[:id])
+        render json: @user_recipes
       end
 
     end

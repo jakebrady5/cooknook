@@ -1,12 +1,13 @@
-function RecipesController(Recipe, UserRecipe, $rootScope, $location, $state, $stateParams, Auth){
+function RecipesController(Recipe, UserRecipe, $rootScope, $location, $stateParams, Auth){
   var ctrl = this;
   ctrl.recipes = Recipe.query();
   ctrl.newRecipe = new Recipe();
   ctrl.filteredList = ctrl.recipes;
-  //ctrl.myRecipes = UserRecipe.query({id: $rootScope.current_user.id})
-  ctrl.myFilteredList = ctrl.myRecipes;
+  UserRecipe.get({id: 1}, function(data){
+    ctrl.myRecipes = data.user_recipes;
+    ctrl.myFilteredList = ctrl.myRecipes;
+  });
   ctrl.search = '';
-  ctrl.secondSearch = '';
 
   if(!!$stateParams.id){
     ctrl.recipe = Recipe.get({id: $stateParams.id});
@@ -30,16 +31,9 @@ function RecipesController(Recipe, UserRecipe, $rootScope, $location, $state, $s
   ctrl.deleteRecipe = function(recipe) {
     recipe.hide=true;
     recipe.$delete(function(){
-      //$state.go($state.current, {}, {reload: true});
       $location.path('recipes');
     });
   };
-
-  // ctrl.refilter = function(){
-  //   ctrl.filteredList = $filter('filter')(ctrl.recipes, ctrl.search);
-  // };
-
-  // ctrl.refilter();
 }
 
 angular

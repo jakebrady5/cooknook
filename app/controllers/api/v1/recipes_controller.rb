@@ -15,6 +15,7 @@ module Api
 
       def create
         @recipe = Recipe.new(recipe_params)
+        @recipe.user_recipes.build(user_id: recipe_params[:user_id])
         if @recipe.save
           respond_to do |format|
             format.json {render :json => @recipe}
