@@ -7,12 +7,12 @@ module Api
 
       def index
         @recipe = Recipe.find(params[:id])
-        respond_with(@recipe.comments)
+        respond_with(@recipe.comments, serializer: nil)
       end
 
       def show
         @recipe = Recipe.find(params[:id])
-        respond_with(@recipe.comments)
+        respond_with(@recipe.comments, serializer: nil)
       end
 
       def create

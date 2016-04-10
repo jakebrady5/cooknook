@@ -6,11 +6,11 @@ module Api
       respond_to :json
 
       def index
-        respond_with(Recipe.all.order("id DESC"))
+        respond_with(Recipe.all.order("id DESC"), serializer: nil)
       end
 
       def show
-        respond_with(Recipe.find(params[:id]))
+        respond_with(Recipe.find(params[:id]), serializer: nil)
       end
 
       def create

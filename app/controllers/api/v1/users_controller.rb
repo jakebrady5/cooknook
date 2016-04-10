@@ -4,7 +4,7 @@ module Api
       respond_to :json
 
       def show
-        respond_with(User.find(params[:id]))
+        respond_with(User.find(params[:id]), serializer: nil)
       end
 
       def update

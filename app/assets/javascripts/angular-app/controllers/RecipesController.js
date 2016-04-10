@@ -1,8 +1,10 @@
-function RecipesController(Recipe, $location, $state, $stateParams, Auth){
+function RecipesController(Recipe, UserRecipe, $rootScope, $location, $state, $stateParams, Auth){
   var ctrl = this;
   ctrl.recipes = Recipe.query();
   ctrl.newRecipe = new Recipe();
   ctrl.filteredList = ctrl.recipes;
+  //ctrl.myRecipes = UserRecipe.query({id: $rootScope.current_user.id})
+  ctrl.myFilteredList = ctrl.myRecipes;
   ctrl.search = '';
   ctrl.secondSearch = '';
 

@@ -1,4 +1,4 @@
-function DeviseController($scope, $rootScope, Auth, User, $location, $state){
+function DeviseController($scope, $rootScope, Auth, User, $location){
 
   $rootScope.$watch('current_user.username', function(){});
 
@@ -47,7 +47,6 @@ function DeviseController($scope, $rootScope, Auth, User, $location, $state){
   //does this belong here or in a service?
   $scope.setCurrentUser = function(){
     Auth.currentUser().then(function(user){
-      debugger;
       $rootScope.current_user = user;
     }, function(error){
       //move this to a more global spot
