@@ -1,8 +1,7 @@
 <h1>Recipes</h1>
-
-Search: <input ng-model="ctrl.search.ingredients" ng-change="ctrl.refilter()" />
+Search: <input ng-model="ctrl.search" ng-model-options="{updateOn: 'default blur', debounce: {'default': 200, 'blur': 0}}"/>
 <ul>
-  <li ng-repeat="recipe in ctrl.filteredList | filter:ctrl.search:strict">
+  <li ng-repeat="recipe in ctrl.filteredList | filter:ctrl.search:strict" ng-hide="recipe.hide">
     <h3><a href="#" ui-sref="home.recipe({id: recipe.id})">{{ recipe.title }}</a></h3>
     <div ng-if="current_user.id == recipe.user_id">
       <a href="#" ui-sref="home.edit({id: recipe.id})">Edit Recipe</a>

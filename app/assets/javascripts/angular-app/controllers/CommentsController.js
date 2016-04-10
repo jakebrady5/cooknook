@@ -1,22 +1,17 @@
-function CommentsController($location, Comment, $stateParams, $state, Auth){
+function CommentsController($scope, $location, Comment, $stateParams, $state, Auth){
   var self = this;
   self.newComment = new Comment();
   self.comments = Comment.query({id: $stateParams.id});
-
-  //remove me later
-  // if(!!$stateParams.id){
-  //   Auth.currentUser().then(function(user){
-  //     console.log(user.id);
-  //   });
-  // }
 
   self.createComment = function(){
     self.newComment.recipe_id = $stateParams.id;
     Auth.currentUser().then(function(user){
       self.newComment.user_id = user.id;
       self.newComment.$save(function(){
-        console.log('comment saved!');
-        $state.go($state.current, {}, {reload: true});
+        self.newComment = new Comment();
+        
+        //change to just append most recent rather than full query?
+        self.comments = Comment.query({id: $stateParams.id});
       });
     });
   };

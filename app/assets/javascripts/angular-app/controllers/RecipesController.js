@@ -3,6 +3,8 @@ function RecipesController(Recipe, $location, $state, $stateParams, Auth){
   ctrl.recipes = Recipe.query();
   ctrl.newRecipe = new Recipe();
   ctrl.filteredList = ctrl.recipes;
+  ctrl.search = '';
+  ctrl.secondSearch = '';
 
   if(!!$stateParams.id){
     ctrl.recipe = Recipe.get({id: $stateParams.id});
@@ -24,12 +26,12 @@ function RecipesController(Recipe, $location, $state, $stateParams, Auth){
   };
 
   ctrl.deleteRecipe = function(recipe) {
+    recipe.hide=true;
     recipe.$delete(function(){
-      $state.go($state.current, {}, {reload: true});
+      //$state.go($state.current, {}, {reload: true});
+      $location.path('recipes');
     });
   };
-
-  ctrl.search = '';
 
   // ctrl.refilter = function(){
   //   ctrl.filteredList = $filter('filter')(ctrl.recipes, ctrl.search);

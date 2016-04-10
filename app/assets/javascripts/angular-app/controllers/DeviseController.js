@@ -1,16 +1,11 @@
 function DeviseController($scope, $rootScope, Auth, User, $location, $state){
 
-  $scope.console = function (){
-    $scope.setCurrentUser();
-    debugger;
-  }
-
   $rootScope.$watch('current_user.username', function(){});
 
   $scope.login = function(){
     Auth.login($scope.credentials).then(function(user){
+      $rootScope.current_user = user;
       $scope.credentials = {};
-      $scope.setCurrentUser();
     }, function(error) {
       console.log(error);
     }).then(function(){
@@ -22,14 +17,13 @@ function DeviseController($scope, $rootScope, Auth, User, $location, $state){
     Auth.register($scope.credentials).then(function(registeredUser) {
       User.get({id: registeredUser.id}, function(user){
         user.username = $scope.credentials.username;
-        user.$update(function(user){
-          $scope.setCurrentUser();
+        user.$update(function(u, success){
+          $rootScope.current_user = u;
         });
       });
     }, function(error) {
       console.log(error);
     }).then(function(){
-        //refactor?
         $location.path('recipes');
       });
   };
@@ -41,7 +35,7 @@ function DeviseController($scope, $rootScope, Auth, User, $location, $state){
         }
     };
     Auth.logout(config).then(function(){
-      $rootScope.user = {};
+      $rootScope.current_user = {};
       $location.path('login');
     }, function(error){
       console.log(error);
@@ -53,6 +47,7 @@ function DeviseController($scope, $rootScope, Auth, User, $location, $state){
   //does this belong here or in a service?
   $scope.setCurrentUser = function(){
     Auth.currentUser().then(function(user){
+      debugger;
       $rootScope.current_user = user;
     }, function(error){
       //move this to a more global spot
@@ -60,6 +55,7 @@ function DeviseController($scope, $rootScope, Auth, User, $location, $state){
     });
   };
 
+  //currently necessary
   $scope.setCurrentUser();
 
   //leaving temporarily to see if needed later
