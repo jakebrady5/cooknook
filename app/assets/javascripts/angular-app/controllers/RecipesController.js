@@ -15,6 +15,10 @@ function RecipesController(Recipe, UserRecipe, $rootScope, $location, $statePara
     ctrl.recipe = Recipe.get({id: $stateParams.id});
   };
 
+  ctrl.checkbox = function(id){
+    console.log(id);
+  };
+
   ctrl.createRecipe = function(){
     Auth.currentUser().then(function(user){
       ctrl.newRecipe.user_id = user.id;

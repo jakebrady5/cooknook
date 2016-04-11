@@ -2,7 +2,10 @@
 Search: <input ng-model="ctrl.search" ng-model-options="{updateOn: 'default blur', debounce: {'default': 200, 'blur': 0}}"/>
 <ul>
   <li ng-repeat="recipe in ctrl.filteredList | filter:ctrl.search:strict" ng-hide="recipe.hide">
-    <h3><a href="#" ui-sref="home.recipe({id: recipe.id})">{{ recipe.title }}</a></h3>
+    <h3>
+      <a href="#" ui-sref="home.recipe({id: recipe.id})">{{ recipe.title }}</a>
+      <input type="checkbox" ng-model="recipe.value" ng-change="ctrl.checkbox(recipe.value)" ng-true-value="'Y'" ng-false-value="'N'">
+    </h3>
     <div ng-if="current_user.id == recipe.user_id">
       <a href="#" ui-sref="home.edit({id: recipe.id})">Edit Recipe</a>
       <a href="" ng-click="ctrl.deleteRecipe(recipe)">Delete Recipe</a>
