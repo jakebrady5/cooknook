@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20160410030120) do
     t.string   "body"
     t.integer  "recipe_id"
     t.integer  "user_id"
+    t.string   "username"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

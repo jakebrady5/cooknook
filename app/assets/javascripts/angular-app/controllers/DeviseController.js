@@ -1,4 +1,4 @@
-function DeviseController($scope, $rootScope, Auth, User, $location){
+function DeviseController($scope, $rootScope, Auth, User, $location, $state){
 
   $rootScope.$watch('current_user.username', function(){});
 
@@ -15,6 +15,8 @@ function DeviseController($scope, $rootScope, Auth, User, $location){
 
   $scope.register = function(){
     Auth.register($scope.credentials).then(function(registeredUser) {
+      $rootScope.current_user = registeredUser;
+      $rootScope.current_user.username = $scope.credentials.username;
       User.get({id: registeredUser.id}, function(user){
         user.username = $scope.credentials.username;
         user.$update(function(u, success){
@@ -35,7 +37,7 @@ function DeviseController($scope, $rootScope, Auth, User, $location){
         }
     };
     Auth.logout(config).then(function(){
-      $rootScope.current_user = {};
+      $rootScope.current_user = undefined;
       $location.path('login');
     }, function(error){
       console.log(error);

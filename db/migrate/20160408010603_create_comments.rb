@@ -4,6 +4,7 @@ class CreateComments < ActiveRecord::Migration
       t.string :body
       t.integer :recipe_id
       t.integer :user_id
+      t.string :username
 
       t.timestamps null: false
     end

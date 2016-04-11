@@ -33,7 +33,7 @@ module Api
 
       private
         def comment_params
-          params.require(:comment).permit(:body, :user_id, :recipe_id)
+          params.require(:comment).permit(:body, :user_id, :recipe_id, :username)
         end
 
     end

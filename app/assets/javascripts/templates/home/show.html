@@ -14,8 +14,7 @@
 <div ng-controller="CommentsController as comm">
 
   <div ng-repeat="comment in comm.comments">
-    <p>By: {{comment.user_id}}: {{comment.body}}</p>
-    <a href="" ng-if="comment.user_id == devise.user.id">Delete</a>
+    <p>{{comment.username}}: {{comment.body}}</p>
   </div>
 
   <form validate ng-submit="comm.createComment()">
