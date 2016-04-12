@@ -4,11 +4,11 @@ Search: <input ng-model="ctrl.search" ng-model-options="{updateOn: 'default blur
   <li ng-repeat="recipe in ctrl.filteredList | filter:ctrl.search:strict" ng-hide="recipe.hide">
     <h3>
       <a href="#" ui-sref="home.recipe({id: recipe.id})">{{ recipe.title }}</a>
-      <input type="checkbox" ng-model="recipe.value" ng-change="ctrl.checkbox(recipe.value)" ng-true-value="'Y'" ng-false-value="'N'">
+      <input type="checkbox" ng-model="recipe.value" ng-click="ctrl.log(recipe.value)" ng-change="ctrl.checkbox(recipe.value, recipe.id, current_user.id)" ng-true-value="'C'" ng-false-value="'D'" ng-checked="ctrl.startingCheck(recipe.id)!=-1">
     </h3>
     <div ng-if="current_user.id == recipe.user_id">
       <a href="#" ui-sref="home.edit({id: recipe.id})">Edit Recipe</a>
       <a href="" ng-click="ctrl.deleteRecipe(recipe)">Delete Recipe</a>
     </div>
   </li>
-</ul>
+</ul> 

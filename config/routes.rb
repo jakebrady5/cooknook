@@ -23,7 +23,7 @@ Rails.application.routes.draw do
         resources :recipes
         resources :comments
         resources :users, only: [:show, :update]
-        resources :user_recipes, only: [:index, :show]
+        resources :user_recipes, only: [:show, :create, :destroy]
       end
     end
   end
