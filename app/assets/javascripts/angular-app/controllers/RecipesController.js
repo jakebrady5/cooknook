@@ -9,12 +9,19 @@ function RecipesController(Recipe, UserRecipe, $rootScope, $location, $statePara
       ctrl.myRecipes = data.user_recipes;
       ctrl.myFilteredList = ctrl.myRecipes;
       ctrl.getIds(ctrl.myRecipes);
-      // ctrl.myRecipes.forEach(function(recipe){
-      //   if(ctrl.startingCheck(recipe.id)!= -1){
-      //     debugger;
-      //     recipe.value = 'C';
-      //   }
-      // })
+
+      ctrl.filteredList.forEach(function(recipe){
+        if(ctrl.startingCheck(recipe.id)!= -1){
+          recipe.value = 'C';
+        }
+      });
+      //REFACTOR!
+      ctrl.myFilteredList.forEach(function(recipe){
+        //difference in arg passed
+        if(ctrl.startingCheck(recipe.recipe.id)!= -1){
+          recipe.value = 'C';
+        }
+      });
     });
   });
   ctrl.search = '';
@@ -28,23 +35,31 @@ function RecipesController(Recipe, UserRecipe, $rootScope, $location, $statePara
   }
 
   ctrl.getIds = function(user_recipes){
-    ctrl.myRecipeIds = user_recipes.map(function(recipe){return recipe.id;});
+    ctrl.myRecipeIds = user_recipes.map(function(recipe){return recipe.recipe.id;});
   };
 
   ctrl.startingCheck = function(recipe_id){
     return ctrl.myRecipeIds.indexOf(recipe_id);
   };
 
+  ctrl.findUserRecipeByRecipeId = function(uRecipe){
+    return uRecipe.recipe.id === ctrl.recipe_id;
+  };
+
   ctrl.checkbox = function(value, recipe_id, user_id){
     if (value === "C"){
       console.log(ctrl.myRecipes);
       //just to stop action for now
-      // var user_recipe = new UserRecipe;
-      // user_recipe.recipe_id = recipe_id;
-      // user_recipe.user_id = user_id;
-      // user_recipe.$save();
-    } else {
-      console.log('destroy');
+      var user_recipe = new UserRecipe;
+      user_recipe.recipe_id = recipe_id;
+      user_recipe.user_id = user_id;
+      user_recipe.$save();
+    };
+    if (value === "D"){
+      ctrl.recipe_id = recipe_id;
+      var uRecipe = ctrl.myRecipes.find(ctrl.findUserRecipeByRecipeId);
+      //console.log(uRecipe);
+      UserRecipe.delete({id: uRecipe.id});
     };
   };
 

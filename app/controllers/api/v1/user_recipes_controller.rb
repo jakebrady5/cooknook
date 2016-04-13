@@ -18,6 +18,7 @@ module Api
       end
 
       def destroy
+        respond_with UserRecipe.destroy(params[:id])
       end
 
       private
