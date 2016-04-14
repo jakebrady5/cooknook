@@ -27,7 +27,7 @@
     "tag": "v1.3.0",
     "commit": "8e3cf6f45aa2305dbc45c9a6b122c102f2ae904e"
   },
-  "_source": "git://github.com/cloudspace/angular_devise.git",
+  "_source": "https://github.com/cloudspace/angular_devise.git",
   "_target": "*",
   "_originalSource": "angular-devise"
 }

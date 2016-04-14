@@ -3,10 +3,25 @@
 </div>
 
 <div>
-  <form ng-submit="register()">
-    <input type="email" placeholder="Email Address" ng-model="credentials.email">
-    <input type="text" placeholder="Username" ng-model="credentials.username">
-    <input type="password" placeholder="Password" ng-model="credentials.password">
+  <form name="form" ng-submit="register()">
+    <label>Email: </label>
+    <input name="email" type="email" placeholder="Email Address" ng-model="credentials.email" required="required" />
+    <div ng-messages="form.email.$error" ng-if="form.email.$touched">
+      <div ng-message="required">Email is a required field!</div>
+      <div ng-message="email">Must be a valid email address!</div>
+    </div><br>
+    <label>Username:</label>
+    <input name="username" type="text" placeholder="Username" ng-model="credentials.username" required="required" minlength="4" />
+    <div ng-messages="form.username.$error" ng-if="form.username.$touched">
+      <div ng-message="required">Username is a required field!</div>
+      <div ng-message="minlength">Minimum username length is 4!</div>
+    </div><br>
+    <label>Password:</label>
+    <input name="password" type="password" placeholder="Password" ng-model="credentials.password" required="required" minlength="8" />
+    <div ng-messages="form.password.$error" ng-if="form.password.$touched">
+      <div ng-message="required">Password is a required field!</div>
+      <div ng-message="minlength">Minimum password length is 8!</div>
+    </div><br>
     <input type="submit" value="Register">
   </form>
 </div>

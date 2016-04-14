@@ -5,7 +5,8 @@
       "angular": "v1.5.3",
       "angular-ui-router": "latest",
       "angular-resource": "v1.5.3",
-      "angular-devise": "latest"
+      "angular-devise": "latest",
+      "angular-messages": "latest"
     }
   },
   "vendor": {
