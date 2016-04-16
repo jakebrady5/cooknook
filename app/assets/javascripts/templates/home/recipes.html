@@ -1,15 +1,14 @@
 <h1>Recipes</h1>
-Search: <input ng-model="ctrl.search" ng-model-options="{updateOn: 'default blur', debounce: {'default': 200, 'blur': 0}}"/>
-<ul>
-  <li ng-repeat="recipe in ctrl.filteredList | filter:ctrl.search:strict" ng-hide="recipe.hide">
-    <h3>
-      <a href="#" ui-sref="home.recipe({id: recipe.id})">{{ recipe.title }}</a>
-      <input type="checkbox" ng-model="recipe.value" ng-click="ctrl.log(recipe.value)" ng-change="ctrl.checkbox(recipe.value, recipe.id, current_user.id)" ng-true-value="'C'" ng-false-value="'D'">
-      <!-- <input type="checkbox" ng-model="recipe.value" ng-click="ctrl.log(recipe.value)" ng-change="ctrl.checkbox(recipe.value, recipe.id, current_user.id)" ng-true-value="'C'" ng-false-value="'D'" ng-checked="ctrl.startingCheck(recipe.id)!=-1"> -->
-    </h3>
-    <div ng-if="current_user.id == recipe.user_id">
-      <a href="#" ui-sref="home.edit({id: recipe.id})">Edit Recipe</a>
-      <a href="" ng-click="ctrl.deleteRecipe(recipe)">Delete Recipe</a>
-    </div>
-  </li>
-</ul> 
+<div>
+  Search: <input ng-model="ctrl.search" ng-model-options="{updateOn: 'default blur', debounce: {'default': 200, 'blur': 0}}"/>
+</div>
+<div ng-repeat="recipe in ctrl.filteredList | filter:ctrl.search:strict" ng-hide="recipe.hide">
+  <h3>
+    <a href="#" ui-sref="home.recipe({id: recipe.id})">{{ recipe.title }}</a>
+    <input type="checkbox" ng-model="recipe.value" ng-change="ctrl.checkbox(recipe.value, recipe.id, current_user.id)" ng-true-value="'C'" ng-false-value="'D'">
+  </h3>
+  <div ng-if="current_user.id == recipe.user_id">
+    <a href="#" ui-sref="home.edit({id: recipe.id})">Edit Recipe</a>
+    <a href="" ng-click="ctrl.deleteRecipe(recipe)">Delete Recipe</a>
+  </div>
+</div>

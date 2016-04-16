@@ -1,27 +1,24 @@
-<div>
-  <h1>Register as a New User</h1>
-</div>
-
-<div>
-  <form name="form" ng-submit="register()">
+<div class="col-lg-4">
+  <form class="form-signin" name="form" ng-submit="register()">
+    <h2 class="form-signin-heading">Register as a New User</h2>
     <label>Email: </label>
-    <input name="email" type="email" placeholder="Email Address" ng-model="credentials.email" required="required" />
-    <div ng-messages="form.email.$error" ng-if="form.email.$touched">
+    <input class="form-control" name="email" type="email" placeholder="Email Address" ng-model="credentials.email" required="required" />
+    <div class="bg-danger" ng-messages="form.email.$error" ng-if="form.email.$touched">
       <div ng-message="required">Email is a required field!</div>
       <div ng-message="email">Must be a valid email address!</div>
     </div><br>
     <label>Username:</label>
-    <input name="username" type="text" placeholder="Username" ng-model="credentials.username" required="required" minlength="4" />
-    <div ng-messages="form.username.$error" ng-if="form.username.$touched">
+    <input class="form-control" name="username" type="text" placeholder="Username" ng-model="credentials.username" required="required" minlength="4" />
+    <div class="bg-danger" ng-messages="form.username.$error" ng-if="form.username.$touched">
       <div ng-message="required">Username is a required field!</div>
       <div ng-message="minlength">Minimum username length is 4!</div>
     </div><br>
     <label>Password:</label>
-    <input name="password" type="password" placeholder="Password" ng-model="credentials.password" required="required" minlength="8" />
-    <div ng-messages="form.password.$error" ng-if="form.password.$touched">
+    <input class="form-control" name="password" type="password" placeholder="Password" ng-model="credentials.password" required="required" minlength="8" />
+    <div class="bg-danger" ng-messages="form.password.$error" ng-if="form.password.$touched">
       <div ng-message="required">Password is a required field!</div>
       <div ng-message="minlength">Minimum password length is 8!</div>
     </div><br>
-    <input type="submit" value="Register">
+    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Register">
   </form>
 </div>

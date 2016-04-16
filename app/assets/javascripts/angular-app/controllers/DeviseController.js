@@ -6,11 +6,14 @@ function DeviseController($scope, $rootScope, Auth, User, $location, $state){
     Auth.login($scope.credentials).then(function(user){
       $rootScope.current_user = user;
       $scope.credentials = {};
+      $location.path('home');
     }, function(error) {
-      console.log(error);
-    }).then(function(){
-      $location.path('recipes');
+      $scope.error = "Invalid email or password.";
+      $location.path('login');
     });
+    // .then(function(){
+    //   $location.path('home');
+    // });
   };
 
   $scope.register = function(){
@@ -26,7 +29,7 @@ function DeviseController($scope, $rootScope, Auth, User, $location, $state){
     }, function(error) {
       console.log(error);
     }).then(function(){
-        $location.path('recipes');
+        $location.path('home');
       });
   };
 
@@ -38,7 +41,7 @@ function DeviseController($scope, $rootScope, Auth, User, $location, $state){
     };
     Auth.logout(config).then(function(){
       $rootScope.current_user = undefined;
-      $location.path('login');
+      $location.path('home');
     }, function(error){
       console.log(error);
     });

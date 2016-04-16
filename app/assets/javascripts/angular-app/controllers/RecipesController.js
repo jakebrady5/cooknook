@@ -30,10 +30,6 @@ function RecipesController(Recipe, UserRecipe, $rootScope, $location, $statePara
     ctrl.recipe = Recipe.get({id: $stateParams.id});
   };
 
-  ctrl.log = function(value){
-    console.log(value);
-  }
-
   ctrl.getIds = function(user_recipes){
     ctrl.myRecipeIds = user_recipes.map(function(recipe){return recipe.recipe.id;});
   };
@@ -48,8 +44,6 @@ function RecipesController(Recipe, UserRecipe, $rootScope, $location, $statePara
 
   ctrl.checkbox = function(value, recipe_id, user_id){
     if (value === "C"){
-      console.log(ctrl.myRecipes);
-      //just to stop action for now
       var user_recipe = new UserRecipe;
       user_recipe.recipe_id = recipe_id;
       user_recipe.user_id = user_id;
@@ -58,7 +52,6 @@ function RecipesController(Recipe, UserRecipe, $rootScope, $location, $statePara
     if (value === "D"){
       ctrl.recipe_id = recipe_id;
       var uRecipe = ctrl.myRecipes.find(ctrl.findUserRecipeByRecipeId);
-      //console.log(uRecipe);
       UserRecipe.delete({id: uRecipe.id});
     };
   };

@@ -7,6 +7,16 @@ angular
         templateUrl: 'home.html',
         controller: 'HomeController as ctrl'
       })
+      .state('home.home', {
+        url: 'home',
+        templateUrl: 'home/index.html',
+        controller: 'RecipesController as ctrl'
+      })
+      .state('home.about', {
+        url: 'about',
+        templateUrl: 'home/about.html',
+        controller: 'RecipesController as ctrl'
+      })
       .state('home.new', {
         url: 'new',
         templateUrl: 'home/new.html',
