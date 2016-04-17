@@ -9,10 +9,11 @@
 <div ng-show="current_user.id == ctrl.recipe.user_id" >
   <a href="#" ui-sref="home.edit({id: ctrl.recipe.id})">Edit Recipe</a>
   <a href="" ng-click="ctrl.deleteRecipe(ctrl.recipe)">Delete Recipe</a>
-</div>
+</div><br>
 
 <div ng-controller="CommentsController as comm">
 
+  <h3>Comments:</h3>
   <div ng-repeat="comment in comm.comments">
     <p>{{comment.username}}: {{comment.body}}</p>
   </div>

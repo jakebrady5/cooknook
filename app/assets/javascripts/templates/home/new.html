@@ -2,7 +2,7 @@
 
 <form name="form" ng-submit="ctrl.createRecipe()">
   <label>Title:</label><br>
-  <input name="title" type="text" ng-model="ctrl.newRecipe.title" required="required">
+  <input autofocus="true" name="title" type="text" ng-model="ctrl.newRecipe.title" required="required">
   <div class="bg-danger" ng-messages="form.title.$error" ng-if="form.title.$touched">
     <div ng-message="required">Title is a required field!</div>
   </div><br><br>

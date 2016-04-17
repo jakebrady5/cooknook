@@ -1,23 +1,20 @@
-function RecipesController(Recipe, UserRecipe, $rootScope, $location, $stateParams, Auth){
+function RecipesController(Recipe, UserRecipe, $location, $stateParams, Auth){
   var ctrl = this;
   ctrl.recipes = Recipe.query();
   ctrl.newRecipe = new Recipe();
-  ctrl.filteredList = ctrl.recipes;
   ctrl.myRecipeIds = [];
   Auth.currentUser().then(function(user){
     UserRecipe.get({id: user.id}, function(data){
       ctrl.myRecipes = data.user_recipes;
-      ctrl.myFilteredList = ctrl.myRecipes;
       ctrl.getIds(ctrl.myRecipes);
 
-      ctrl.filteredList.forEach(function(recipe){
+      ctrl.recipes.forEach(function(recipe){
         if(ctrl.startingCheck(recipe.id)!= -1){
           recipe.value = 'C';
         }
       });
-      //REFACTOR!
-      ctrl.myFilteredList.forEach(function(recipe){
-        //difference in arg passed
+      //difference in arg passed
+      ctrl.myRecipes.forEach(function(recipe){
         if(ctrl.startingCheck(recipe.recipe.id)!= -1){
           recipe.value = 'C';
         }
@@ -42,7 +39,7 @@ function RecipesController(Recipe, UserRecipe, $rootScope, $location, $statePara
     return uRecipe.recipe.id === ctrl.recipe_id;
   };
 
-  ctrl.checkbox = function(value, recipe_id, user_id){
+  ctrl.favoritize = function(value, recipe_id, user_id){
     if (value === "C"){
       var user_recipe = new UserRecipe;
       user_recipe.recipe_id = recipe_id;
@@ -72,7 +69,7 @@ function RecipesController(Recipe, UserRecipe, $rootScope, $location, $statePara
   };
 
   ctrl.deleteMyRecipe = function(recipe){
-    recipe.hide=true;
+    recipe.hide = true;
     Recipe.get({id: recipe.recipe.id}, function(data){
       data.$delete(function(){
         $location.path('my_recipes');
@@ -81,7 +78,7 @@ function RecipesController(Recipe, UserRecipe, $rootScope, $location, $statePara
   };
 
   ctrl.deleteRecipe = function(recipe) {
-    recipe.hide=true;
+    recipe.hide = true;
     recipe.$delete(function(){
       $location.path('my_recipes');
     });

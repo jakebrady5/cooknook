@@ -6,14 +6,11 @@ function DeviseController($scope, $rootScope, Auth, User, $location, $state){
     Auth.login($scope.credentials).then(function(user){
       $rootScope.current_user = user;
       $scope.credentials = {};
-      $location.path('home');
+      $location.path('recipes');
     }, function(error) {
       $scope.error = "Invalid email or password.";
       $location.path('login');
     });
-    // .then(function(){
-    //   $location.path('home');
-    // });
   };
 
   $scope.register = function(){
@@ -27,7 +24,8 @@ function DeviseController($scope, $rootScope, Auth, User, $location, $state){
         });
       });
     }, function(error) {
-      console.log(error);
+      $scope.error = "Invalid email or password.";
+      $location.path('login');
     }).then(function(){
         $location.path('home');
       });
@@ -43,34 +41,22 @@ function DeviseController($scope, $rootScope, Auth, User, $location, $state){
       $rootScope.current_user = undefined;
       $location.path('home');
     }, function(error){
-      console.log(error);
+      $scope.error = "Error Logging Out.";
+      $location.path('home');
     });
   };
 
   $scope.loggedIn = Auth.isAuthenticated;
 
-  //does this belong here or in a service?
   $scope.setCurrentUser = function(){
     Auth.currentUser().then(function(user){
       $rootScope.current_user = user;
     }, function(error){
-      //move this to a more global spot
       $location.path('login');
     });
   };
 
-  //currently necessary
   $scope.setCurrentUser();
-
-  //leaving temporarily to see if needed later
-  $scope.$on('devise:new-registration', function(e, user) {
-  });
-
-  $scope.$on('devise:login', function(e, user) {
-  });
-
-  $scope.$on('devise:logout', function(e, user) {
-  });
 
 }
 
