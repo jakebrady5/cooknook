@@ -5,6 +5,7 @@ class CreateRecipes < ActiveRecord::Migration
       t.text :instructions
       t.text :ingredients
       t.integer :user_id
+      t.integer :duration, default: 0
 
       t.timestamps null: false
     end

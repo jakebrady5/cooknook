@@ -30,13 +30,9 @@ ActiveRecord::Schema.define(version: 20160410030120) do
     t.text     "instructions"
     t.text     "ingredients"
     t.integer  "user_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
-  create_table "shopping_lists", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "duration",     default: 0
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "user_recipes", force: :cascade do |t|

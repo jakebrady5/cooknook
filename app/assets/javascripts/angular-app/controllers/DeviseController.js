@@ -51,8 +51,6 @@ function DeviseController($scope, $rootScope, Auth, User, $location, $state){
   $scope.setCurrentUser = function(){
     Auth.currentUser().then(function(user){
       $rootScope.current_user = user;
-    }, function(error){
-      $location.path('login');
     });
   };
 

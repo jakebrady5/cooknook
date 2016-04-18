@@ -3,6 +3,7 @@ function RecipesController(Recipe, UserRecipe, $location, $stateParams, Auth){
   ctrl.recipes = Recipe.query();
   ctrl.newRecipe = new Recipe();
   ctrl.myRecipeIds = [];
+  ctrl.duration = ["< 30 minutes", "30-60 minutes", "> 60 minutes"];
   Auth.currentUser().then(function(user){
     UserRecipe.get({id: user.id}, function(data){
       ctrl.myRecipes = data.user_recipes;
@@ -55,6 +56,8 @@ function RecipesController(Recipe, UserRecipe, $location, $stateParams, Auth){
 
   ctrl.createRecipe = function(){
     Auth.currentUser().then(function(user){
+      debugger;
+      ctrl.newRecipe.duration = parseInt(ctrl.newRecipe.duration);
       ctrl.newRecipe.user_id = user.id;
       ctrl.newRecipe.$save(function(){
         $location.path('my_recipes');
