@@ -1,8 +1,15 @@
 <h1>Recipes</h1>
 <div>
   Search: <input ng-model="ctrl.search" ng-model-options="{updateOn: 'default blur', debounce: {'default': 200, 'blur': 0}}"/>
+  <label>Total Time:</label>
+  <select ng-model="ctrl.timeLimit">
+    <option value=""> -- select an option -- </option>
+    <option value="0">< 30 minutes</option>
+    <option value="1">30-60 minutes</option>
+    <option value="2">> 60 minutes</option>
+  </select><br><br>
 </div>
-<div ng-repeat="recipe in ctrl.recipes | filter:ctrl.search:strict" ng-hide="recipe.hide">
+<div ng-repeat="recipe in ctrl.recipes | filter:ctrl.search:strict | filter:{duration:ctrl.timeLimit}" ng-hide="recipe.hide">
   <h3>
     <a href="#" ui-sref="home.recipe({id: recipe.id})">{{ recipe.title }}</a>
     <input type="checkbox" ng-model="recipe.value" ng-change="ctrl.favoritize(recipe.value, recipe.id, current_user.id)" ng-true-value="'C'" ng-false-value="'D'">
