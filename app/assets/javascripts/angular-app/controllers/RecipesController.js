@@ -74,9 +74,7 @@ function RecipesController(Recipe, UserRecipe, $location, $stateParams, Auth){
   ctrl.deleteMyRecipe = function(recipe){
     recipe.hide = true;
     Recipe.get({id: recipe.recipe.id}, function(data){
-      data.$delete(function(){
-        $location.path('my_recipes');
-      });
+      data.$delete();
     });
   };
 
