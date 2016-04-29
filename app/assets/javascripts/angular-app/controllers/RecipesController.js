@@ -41,6 +41,7 @@ function RecipesController(Recipe, UserRecipe, $location, $stateParams, Auth){
   };
 
   ctrl.favoritize = function(value, recipe_id, user_id){
+    console.log(recipe_id)
     if (value === "C"){
       var user_recipe = new UserRecipe;
       user_recipe.recipe_id = recipe_id;
@@ -56,7 +57,6 @@ function RecipesController(Recipe, UserRecipe, $location, $stateParams, Auth){
 
   ctrl.createRecipe = function(){
     Auth.currentUser().then(function(user){
-      debugger;
       ctrl.newRecipe.duration = parseInt(ctrl.newRecipe.duration);
       ctrl.newRecipe.user_id = user.id;
       ctrl.newRecipe.$save(function(){
