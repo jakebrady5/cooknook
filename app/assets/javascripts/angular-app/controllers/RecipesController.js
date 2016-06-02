@@ -1,32 +1,36 @@
-function RecipesController(Recipe, UserRecipe, $location, $stateParams, Auth){
+function RecipesController(Recipe, UserRecipe, $location, $stateParams, Auth, $q){
   var ctrl = this;
   ctrl.recipes = Recipe.query();
   ctrl.newRecipe = new Recipe();
   ctrl.myRecipeIds = [];
   ctrl.duration = ["< 30 minutes", "30-60 minutes", "> 60 minutes"];
-  Auth.currentUser().then(function(user){
-    UserRecipe.get({id: user.id}, function(data){
-      ctrl.myRecipes = data.user_recipes;
-      ctrl.getIds(ctrl.myRecipes);
-
-      ctrl.recipes.forEach(function(recipe){
-        if(ctrl.startingCheck(recipe.id)!= -1){
-          recipe.value = 'C';
-        }
-      });
-      //difference in arg passed
-      ctrl.myRecipes.forEach(function(recipe){
-        if(ctrl.startingCheck(recipe.recipe.id)!= -1){
-          recipe.value = 'C';
-        }
-      });
-    });
-  });
   ctrl.search = '';
 
   if(!!$stateParams.id){
     ctrl.recipe = Recipe.get({id: $stateParams.id});
   };
+
+  Auth.currentUser().then(function(user){
+    ctrl.user_recipes = UserRecipe.get({id: user.id}, function(data){
+      ctrl.myRecipes = data.user_recipes;
+      ctrl.getIds(ctrl.myRecipes);
+    });
+
+    $q.all([ctrl.user_recipes.$promise, ctrl.recipes.$promise]).then(function(){
+      ctrl.recipes.forEach(function(recipe){
+        if(ctrl.startingCheck(recipe.id)!= -1){
+          recipe.value = 'C';
+        }
+      });
+
+      ctrl.myRecipes.forEach(function(recipe){
+        if(ctrl.startingCheck(recipe.recipe.id)!= -1){
+          recipe.value = 'C';
+        }
+      });
+    })
+
+  });
 
   ctrl.getIds = function(user_recipes){
     ctrl.myRecipeIds = user_recipes.map(function(recipe){return recipe.recipe.id;});
