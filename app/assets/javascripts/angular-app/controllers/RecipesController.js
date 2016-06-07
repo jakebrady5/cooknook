@@ -16,7 +16,7 @@ function RecipesController(Recipe, UserRecipe, $location, $stateParams, Auth, $q
       ctrl.getIds(ctrl.myRecipes);
     });
 
-    $q.all([ctrl.user_recipes.$promise, ctrl.recipes.$promise]).then(function(){
+    $q.all([ctrl.recipes.$promise, ctrl.user_recipes.$promise]).then(function(){
       ctrl.recipes.forEach(function(recipe){
         if(ctrl.startingCheck(recipe.id)!= -1){
           recipe.value = 'C';
