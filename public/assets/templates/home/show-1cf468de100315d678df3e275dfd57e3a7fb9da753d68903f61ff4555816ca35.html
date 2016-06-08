@@ -1,0 +1,28 @@
+<h2>{{ ctrl.recipe.title }}</h2>
+
+<h3>Duration: {{ctrl.duration[ctrl.recipe.duration]}}</h3>
+
+<h3>Ingredients:</h3>
+<div class="angular-with-newlines">{{ ctrl.recipe.ingredients }}</div>
+
+<h3>Instructions:</h3>
+<div class="angular-with-newlines">{{ ctrl.recipe.instructions }}</div><br>
+
+<div ng-show="current_user.id == ctrl.recipe.user_id" >
+  <a href="#" ui-sref="home.edit({id: ctrl.recipe.id})">Edit Recipe</a>
+  <a href="" ng-click="ctrl.deleteRecipe(ctrl.recipe)">Delete Recipe</a>
+</div><br>
+
+<div ng-controller="CommentsController as comm">
+
+  <h3>Comments:</h3>
+  <div ng-repeat="comment in comm.comments">
+    <p>{{comment.username}}: {{comment.body}}</p>
+  </div>
+
+  <form validate ng-submit="comm.createComment()">
+    <label>Comment:</label><br>
+    <textarea rows="16" cols="75" ng-model="comm.newComment.body"></textarea><br>
+    <input type="submit" value="Comment">
+  </form>
+</div>

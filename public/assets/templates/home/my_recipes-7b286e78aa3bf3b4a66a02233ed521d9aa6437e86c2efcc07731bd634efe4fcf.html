@@ -1,0 +1,15 @@
+<h1>My Recipes</h1>
+<div>
+  Search: <input ng-model="ctrl.search" ng-model-options="{updateOn: 'default blur', debounce: {'default': 200, 'blur': 0}}"/>
+</div>
+
+<div ng-repeat="recipe in ctrl.myRecipes | filter:ctrl.search:strict" ng-hide="recipe.hide">
+  <h3>
+    <a href="#" ui-sref="home.recipe({id: recipe.recipe.id})">{{ recipe.recipe.title }}</a>
+    <input type="checkbox" ng-model="recipe.value" ng-change="ctrl.favoritize(recipe.value, recipe.recipe.id, current_user.id)" ng-true-value="'C'" ng-false-value="'D'">
+  </h3>
+  <div ng-if="current_user.id == recipe.recipe.user_id">
+    <a href="#" ui-sref="home.edit({id: recipe.recipe.id})">Edit Recipe</a>
+    <a href="" ng-click="ctrl.deleteMyRecipe(recipe)">Delete Recipe</a>
+  </div>
+</div>
