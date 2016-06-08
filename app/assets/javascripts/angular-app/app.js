@@ -53,6 +53,6 @@ angular
         controller: 'DeviseController as devise'
       });
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/home');
 
   });
