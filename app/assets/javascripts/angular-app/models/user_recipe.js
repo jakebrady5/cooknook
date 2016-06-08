@@ -1,5 +1,5 @@
 function UserRecipe($resource){
-  return $resource('https://localhost:3000/api/v1/user_recipes/:id.json', {id: '@id'}, {delete: {method: 'DELETE'}});
+  return $resource('https://0.0.0.0:3000/api/v1/user_recipes/:id.json', {id: '@id'}, {delete: {method: 'DELETE'}});
 }
 
 angular
