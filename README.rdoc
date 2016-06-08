@@ -1,7 +1,10 @@
 Cooknook is a single page app to store and share recipes.
 
+Cooknook is hosted on Heroku [here](https://afternoon-plateau-42143.herokuapp.com).
+
 So long as you have Ruby and PostgreSQL installed the following steps should get you up and running:
 
 $ bundle install
-$ rake db:create db:migrate
+$ rake db:create db:migrate db:seed
 $ rails s
+and visit localhost:3000
