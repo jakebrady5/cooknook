@@ -37381,28 +37381,28 @@ angular
   .module('app')
   .controller('RecipesController', RecipesController);
 function Comment($resource){
-  return $resource('http://localhost:3000/api/v1/comments/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
+  return $resource('https://localhost:3000/api/v1/comments/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
 }
 
 angular
   .module('app')
   .factory('Comment', Comment);
 function Recipe($resource){
-  return $resource('http://localhost:3000/api/v1/recipes/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
+  return $resource('https://localhost:3000/api/v1/recipes/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
 }
 
 angular
   .module('app')
   .factory('Recipe', Recipe);
 function User($resource){
-  return $resource('http://localhost:3000/api/v1/users/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
+  return $resource('https://localhost:3000/api/v1/users/:id.json', {id: '@id'}, {update: {method: 'PUT'}});
 }
 
 angular
   .module('app')
   .factory('User', User);
 function UserRecipe($resource){
-  return $resource('http://localhost:3000/api/v1/user_recipes/:id.json', {id: '@id'}, {delete: {method: 'DELETE'}});
+  return $resource('https://localhost:3000/api/v1/user_recipes/:id.json', {id: '@id'}, {delete: {method: 'DELETE'}});
 }
 
 angular
